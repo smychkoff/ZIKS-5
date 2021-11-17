@@ -50,23 +50,12 @@ namespace ZIKS5
                             asciiFlag = false;
                     if (asciiFlag)
                     {
-                        bool isHex = true;
-                        foreach (char c in vectorBox.Text)
-                        {
-                            if (!((c >= '0' && c <= '9') || (c >= 'A' && c <= 'F')))
-                            {
-                                isHex = false;
-                            }
-                        }
-                        if (isHex)
-                        {
                             AES.SetEncodedIV(vectorBox.Text, "ascii");
                             AES.SetEncodedKey(passwordBox.Text.PadLeft(16, '0'), "ascii");
                             if (flag == 1)
                                 File.WriteAllText(outputFilePath + "_encrypted.txt", AES.EncryptStringENC(file));
                             else if (flag == 2)
                                 File.WriteAllText(outputFilePath + "_decrypted.txt", AES.DecryptStringENC(file));
-                        }
                     }
                     else
                         MessageBox.Show("Error! Password must be ASCII encoded!");
